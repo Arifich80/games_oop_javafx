@@ -3,7 +3,7 @@ public class Win {
     public static boolean monoHorizontal(int[][] board, int row) {
         boolean result = true;
         for (int index = 0; index < board.length; index++) {
-            if (board[row][index] != 1 ) {
+            if (board[row][index] != 1) {
                 result = false;
                 break;
             }
@@ -21,7 +21,6 @@ public class Win {
         }
         return result;
     }
-
 
     public static boolean check(int[][] board) {
         boolean rsl = false;
