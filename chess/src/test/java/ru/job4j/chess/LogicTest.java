@@ -1,24 +1,37 @@
 package ru.job4j.chess;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.black.BishopBlack;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.hamcrest.CoreMatchers.is;
 
 public class LogicTest {
 
-    @Test
-    public void whenMoveThenFigureNotFoundException()
+    @Test(expected = FigureNotFoundException.class)
+    public void whenFigureNotFoundThenFinish()
             throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
         Logic logic = new Logic();
-        FigureNotFoundException exception = assertThrows(FigureNotFoundException.class, () -> {
-            logic.move(Cell.C1, Cell.H6);
-        });
-        assertThat(exception.getMessage()).isEqualTo("Figure not found on the board.");
+        logic.add(new BishopBlack(Cell.C2));
+        logic.move(Cell.C1, Cell.H6);
+    }
+
+    @Test(expected = OccupiedCellException.class)
+    public void whenOccupiedCellThenFinish()
+            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C1));
+        logic.add(new BishopBlack(Cell.D2));
+        logic.move(Cell.C1, Cell.H6);
+    }
+
+    @Test(expected = ImpossibleMoveException.class)
+    public void whenImpossibleMoveThenFinish()
+            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C1));
+        logic.move(Cell.C1, Cell.H7);
     }
 }
-
-

@@ -10,6 +10,7 @@ import ru.job4j.chess.firuges.Figure;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 import static ru.job4j.chess.firuges.Cell.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class BishopBlackTest {
 
@@ -22,9 +23,8 @@ public class BishopBlackTest {
 
     @Test
     public void whenTheRightCopy() {
-        Figure bishopBlack = new BishopBlack(C1);
-        Figure expected = bishopBlack.copy(C1);
-        assertThat(expected.position(), is(C1));
+        Figure figure = new BishopBlack(A5);
+        assertThat(figure.copy(A7).position(), is(A7));
     }
 
     @Test
